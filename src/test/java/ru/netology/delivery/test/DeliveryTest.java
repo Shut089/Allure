@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 import ru.netology.delivery.data.DataGenerator;
+import io.qameta.allure.selenide.AllureSelenide;
 
 import java.time.Duration;
 
@@ -18,16 +19,18 @@ import static com.codeborne.selenide.Selenide.open;
 class DeliveryTest {
 
     @BeforeEach
-    void setupAll() {
-
-        open("http://localhost:9999");
-        SelenideLogger.removeListener("allure", new AllureSelenid());
+    void setupALL() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
     }
-
+    @BeforeEach
+    void setup() {
+        open("http://localhost:9999");
+    }
 
     @AfterAll
     static void tearDownAll() {
-        SelenideLogger.removeListener("alLure");
+
+        SelenideLogger.removeListener("allure");
     }
 
     @Test
